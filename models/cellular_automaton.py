@@ -24,26 +24,26 @@ class CellularAutomaton():
 
     def get_cell(self, left, me, right):
         binary = [left, me, right]
-        dec = self.converter.convert(binary)
+        dec = self.converter.convert_to_dec(binary)
         index = 7 - dec
         return self.rules[index]
 
     def evolve(self):
         next_gen = []
         for index in range(CELLS):
+            me = self.cells[index]
             if index == 0:
                 # Left corner
-                next_gen.append(0)
-                pass
+                left = self.cells[CELLS - 1]
+                right = self.cells[index + 1]
             elif index == CELLS - 1:
                 # Right corner
-                next_gen.append(0)
-                pass
-            else:
+                right = self.cells[0]
                 left = self.cells[index - 1]
-                me = self.cells[index]
+            else:
                 right = self.cells[index + 1]
-                cell = self.get_cell(left, me, right)
-                next_gen.append(cell)
+                left = self.cells[index - 1]
+            cell = self.get_cell(left, me, right)
+            next_gen.append(cell)
 
         self.cells = next_gen.copy()

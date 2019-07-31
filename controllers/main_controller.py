@@ -1,4 +1,3 @@
-from config.config import GENS
 from models.cellular_automaton import CellularAutomaton
 from models.rules import Rules
 from tkinter import *
@@ -17,11 +16,14 @@ class MainController():
         root.mainloop()
 
     def reload(self):
+        self.main_view.resize_cells()
         # Get the set of rules
         rule_n = self.main_view.cbx_rules.get()
         rules = self.rules.get(rule_n)
         self.cellular_automaton = CellularAutomaton(rules)
-        print(self.cellular_automaton.cells)
-        for gen in range(GENS):
+
+        # Get the number of generatios
+        gens = int(self.main_view.spx_gens.get())
+        for gen in range(gens):
             self.main_view.draw_generation(self.cellular_automaton.cells, gen)
             self.cellular_automaton.evolve()

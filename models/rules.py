@@ -1,3 +1,6 @@
+from helpers.binary_converter import BinaryConverter
+
+
 class Rules():
     """ Class that contains all the 256 rules.
     """
@@ -6,11 +9,12 @@ class Rules():
         self.init_rules()
 
     def init_rules(self):
-        self.rules = {
-            '1': [0, 0, 0, 0, 0, 0, 0, 0],
-            '2': [0, 0, 0, 0, 0, 0, 0, 1],
-            '3': [0, 0, 0, 0, 0, 0, 1, 0]
-        }
-
+        rule_n = 0 #  Rule number
+        bin_converter = BinaryConverter()
+        while (rule_n < 256):
+            bin = bin_converter.convert_to_bin(rule_n)
+            self.rules.update({ str(rule_n): bin })
+            rule_n = rule_n + 1
+            
     def get(self, n):
         return self.rules[n]
