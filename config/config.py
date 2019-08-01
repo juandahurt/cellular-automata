@@ -12,3 +12,6 @@ DEAD = 0
 # Colors
 ALIVE_COLOR = '#696969'
 DEAD_COLOR = '#e3e3e3'
+
+# File
+PATH = 'result.txt'
