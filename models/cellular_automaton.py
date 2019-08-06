@@ -1,5 +1,6 @@
 from config.config import CELLS, ALIVE, DEAD
 from helpers.binary_converter import BinaryConverter
+from helpers.file_writer import FileWriter
 from random import random
 
 
@@ -12,6 +13,7 @@ class CellularAutomaton():
         self.rules = rules
         self.cells = []
         self.converter = BinaryConverter()
+        self.file_writer = FileWriter()
         self.init_cells()
 
     def init_cells(self):
@@ -47,3 +49,14 @@ class CellularAutomaton():
             next_gen.append(cell)
 
         self.cells = next_gen.copy()
+
+    def add_row(self, gen):
+        print(self.cells)
+        self.file_writer.add_row(gen, self.cells)
+
+    def save(self, rule, gens):
+        # Write the CA
+        self.file_writer.write(rule, gens)
+
+        # Clear rows
+        self.file_writer.clear_rows()

@@ -15,6 +15,7 @@ class FileWriter():
 
     def clear_rows(self):
         self.gens_table.clear_rows()
+        self.info_table.clear_rows()
 
     def write(self, rule, gens):
         self.info_table.add_row([rule, gens])
